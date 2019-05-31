@@ -1,4 +1,4 @@
-#Raspberry Pi DNS Server/No-IP/OpenVPN/Pi-Hole/DNSCrypt
+# Raspberry Pi DNS Server/No-IP/OpenVPN/Pi-Hole/DNSCrypt
 
 ## 1. Get a static ip address - no-ip.com
 * http://www.darwinbiler.com/dynamic-dns-using-raspberry-pi/
