@@ -10,8 +10,6 @@ sudo apt-get update && \
 sudo apt-get upgrade -y
 ```
 
-
-
 ```bash
 cd /usr/local/src/ && \
 sudo wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz && \
@@ -39,13 +37,12 @@ cd /usr/local/src/ && \
 sudo rm -r /usr/local/src/noip*
 ```
 
-
-
 ## 2. Install OpenVPN
 
 * https://itchy.nl/raspberry-pi-3-with-openvpn-pihole-dnscrypt
 * https://github.com/Nyr/openvpn-install
 * https://raspberrytips.com/raspberry-pi-dns-server/
+* https://medium.freecodecamp.org/running-your-own-openvpn-server-on-a-raspberry-pi-8b78043ccdea
 
 Download the Installer, and begin the installation.  for the external hostname use your no-ip address.
 
@@ -74,7 +71,6 @@ sudo systemctl restart openvpn
 
 Enable OpenVPN acccess from outside of LAN by port forwarding the openVPN port you selected in setup.  Default port is 1149
 
-* https://medium.freecodecamp.org/running-your-own-openvpn-server-on-a-raspberry-pi-8b78043ccdea
 
 ## 3. Install pi-Hole
 
@@ -111,33 +107,37 @@ Now all devices on your LAN will automatically use the Pi-Hole service.
 * https://github.com/jedisct1/dnscrypt-proxy/releases
 
 1. Downlaod, untar, and rename the prebuilt binary.
-	```bash
-   cd /opt && \
-   sudo wget https://github.com/jedisct1/dnscrypt-proxy/releases/download/2.0.23/dnscrypt-proxy-linux_arm-2.0.23.tar.gz && \
-   sudo tar -xf dnscrypt-proxy-linux_arm-2.0.23.tar.gz && \
-   sudo rm -r dnscrypt-proxy-linux_arm-2.0.23.tar.gz && \
-   sudo mv linux-arm dnscrypt-proxy
-  ```
+```bash
+cd /opt && \
+sudo wget https://github.com/jedisct1/dnscrypt-proxy/releases/download/2.0.23/dnscrypt-proxy-linux_arm-2.0.23.tar.gz && \
+sudo tar -xf dnscrypt-proxy-linux_arm-2.0.23.tar.gz && \
+sudo rm -r dnscrypt-proxy-linux_arm-2.0.23.tar.gz && \
+sudo mv linux-arm dnscrypt-proxy
+```
+
 2. Create a config file using ```example-dnscrypt-proxy.toml``` .
-  ```bash
-  cd dnscrypt-proxy && \
-  sudo cp example-dnscrypt-proxy.toml dnscrypt-proxy.toml
-  ```
+```bash
+cd dnscrypt-proxy && \
+sudo cp example-dnscrypt-proxy.toml dnscrypt-proxy.toml
+```
+
 3. Edit the toml file. 
-	```bash
-	sudo nano dnscrypt-proxy.toml
-	```
-	* Edit the port, since ```53``` is already being used by Pi-Hole. This is the ```listen_addresses``` line. Set ```listen_addresses = ['127.0.0.1:54','[::1]:54']``` .
-	* Set ```require_dnssec = true```.
-	* Set ```server_names = ['dnscrypt.nl-ns0']```.
+```bash
+sudo nano dnscrypt-proxy.toml
+```
+* Edit the port, since ```53``` is already being used by Pi-Hole. This is the ```listen_addresses``` line. Set ```listen_addresses = ['127.0.0.1:54','[::1]:54']``` .
+* Set ```require_dnssec = true```.
+* Set ```server_names = ['dnscrypt.nl-ns0']```.
+
 4. Install dnscrypt-proxy service.
-  ```bash
-  sudo ./dnscrypt-proxy -service install
-  ```
+```bash
+sudo ./dnscrypt-proxy -service install
+```
+
 5. Start the new service.
-   ```bash
-   sudo ./dnscrypt-proxy -service start
-   ```
+```bash
+sudo ./dnscrypt-proxy -service start
+```
 
 ## 5. Configure Pi-hole to use DNSCrypt
 
