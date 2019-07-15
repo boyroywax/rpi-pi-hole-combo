@@ -143,7 +143,7 @@ sudo ./dnscrypt-proxy -service start
 
 1. Login to Pi-Hole admin dashboard
 2. Settings > DNS under "Upstream DNS Server" header.
-   * Set **Custom 1 (IPv4)** to ```127.0.0.1#53``` 
+   * Set **Custom 1 (IPv4)** to ```127.0.0.1#54``` 
    * Set **Custom 3 (IPv6)** to ```::1#54 ```
 3. Reboot Raspberry Pi.
 
