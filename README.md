@@ -71,6 +71,14 @@ sudo systemctl restart openvpn
 
 Enable OpenVPN acccess from outside of LAN by port forwarding the openVPN port you selected in setup.  Default port is 1149
 
+Remove tun0 created by openvpn
+```shell
+## Delete the IP address only
+sudo ip addr del 10.0.0.2/24 dev tun0
+
+## To remove an tun* interface
+sudo ip link delete tun0
+```
 
 ## 3. Install pi-Hole
 
